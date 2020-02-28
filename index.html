@@ -11,7 +11,9 @@
     <script>
     $.getJSON('https://o136z8hk40.execute-api.us-east-1.amazonaws.com/dev/get-list-of-conferences', function(data) {
         
-        var text = `Date: ${data.date}<br>
+        var text = `Conference URL: ${data.confUrl}<br>
+                    Image: ${data.imageURL}<br>
+                    Date: ${data.date}<br>
                     Time: ${data.time}<br>
                     Unix time: ${data.milliseconds_since_epoch}`
                     
