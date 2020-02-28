@@ -4,23 +4,65 @@
 <title>JavaScript - read JSON from URL</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
-
-<body>
-    <div class="mypanel"></div>
-
     <script>
-    $.getJSON('https://o136z8hk40.execute-api.us-east-1.amazonaws.com/dev/get-list-of-conferences', function(data) {
-        
-        var text = `Conference URL: ${data.confUrl}<br>
-                    Image: ${data.imageURL}<br>
-                    Date: ${data.date}<br>
-                    Time: ${data.time}<br>
-                    Unix time: ${data.milliseconds_since_epoch}`
-                    
-        
-        $(".mypanel").html(text);
-    });
+        window.onload = () => {
+ const SERVER_URL = 'https://o136z8hk40.execute-api.us-east-1.amazonaws.com/dev/get-list-of-conferences';
+ // get table element
+ const table = document.querySelector('#conferences_list');
+ // call API using `fetch`
+ fetch(SERVER_URL)
+     .then(res => res.json())
+     .then(res => {
+        // loop over all users
+        res.data.map(user => {
+ 		// create a `tr` element
+		const tr = document.createElement('tr');
+		// create ID `td`
+        const name = document.createElement('td');
+        name.textContent = `${confName}`;
+        const image = document.createElement('td');
+        image.textContent = `${imageURL}`;
+		const url = document.createElement('td');
+ 		url.textContent = `${confUrl}`;
+        const startDate = document.createElement('td');
+        startDate.textContent = `${confStartDate}`;
+        const endDate = document.createElement('td');
+        endDate.textContent = `${confEndDate}`;
+        const venue_details = document.createElement('td');
+        venue_details.textContent = `${venue}`;
+        const cType = document.createElement('td');
+        cType.textContent = `${entryType}`;
+ 		tr.appendChild(name);
+        tr.appendChild(image);
+        tr.appendChild(url);
+        tr.appendChild(startDate);
+        tr.appendChild(endDate);
+        tr.appendChild(venue_details);
+        tr.appendChild(cType);
+ 		// app tr to table
+ 		table.querySelector('tbody').appendChild(tr);
+       });
+     })
+     .catch(err => console.log('Error:', err));
+        }
     </script>
-    
+    <body>
+ <h1>Users List</h1>
+ <table id="conferences_list">
+ <thead>
+ <tr>
+ <th>Conference Name</th>
+ <th>Image</th>
+ <th>Conference URL</th>
+ <th>Conference Start Date</th>
+ <th>Conference End Date</th>
+ <th>Conference Venue</th>
+ <th>Conference Type</th>
+ </tr>
+ </thead>
+ <tbody>
+ <!-- load users here -->
+ </tbody>
+ </table>
 </body>
 </html>
