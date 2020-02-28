@@ -8,6 +8,11 @@ $(document).ready(function(){
 		$.each(data,function(key,value){
 			conferences_data += '<tr>';
 			conferences_data += '<td>'+value.confName+'</td>';
+			conferences_data += '<td>'+value.confUrl+'</td>';
+			conferences_data += '<td>'+value.confStartDate+'</td>';
+			conferences_data += '<td>'+value.confEndDate+'</td>';
+			conferences_data += '<td>'+value.venue+'</td>';
+			conferences_data += '<td>'+value.entryType+'</td>';
 			conferences_data += '</tr>';
 		});
 		$('#conferences_table').append(conferences_data);
@@ -19,6 +24,11 @@ $(document).ready(function(){
 <table id="conferences_table">
 <tr>
 <th>Conference Name</th>
+<th>Conference URL</th>
+<th>Conference Starts</th>
+<th>Conference Ends</th>
+<th>Conference Address</th>
+<th>Conference Type</th>
 </tr>
 </table>
 </body>
